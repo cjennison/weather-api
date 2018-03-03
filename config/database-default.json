@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "host": "localhost",
+    "user": "root",
+    "password" : "",
+    "database": "weather_api",
+    "driver": "mysql",
+    "multipleStatements": true
+  }
+}
