@@ -16,8 +16,8 @@ server.use(
 
 require('./routes')(server)
 
-const Sequelize = require('./app/database')
-Sequelize
+const db = require('./db/models')
+db.sequelize
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');

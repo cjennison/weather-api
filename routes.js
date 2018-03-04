@@ -1,4 +1,4 @@
-const Subscriber = require('./app/controllers/subscriber')
+const SubscriberController = require('./controllers/subscriber')
 
 module.exports = function (server) {
   //Allow OPTIONS
@@ -8,5 +8,5 @@ module.exports = function (server) {
   });
   
   //Initialize REST Routes
-  Subscriber(server)
+  new SubscriberController(server)
 }
