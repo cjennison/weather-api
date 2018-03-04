@@ -1,2 +1,3 @@
-config/config.json
+config/database.json
+config/wunderground.json
 node_modules

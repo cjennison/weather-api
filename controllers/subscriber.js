@@ -1,4 +1,4 @@
-const { Subscriber } = require('../db/models')
+const { Subscriber, EmailRecord } = require('../db/models')
 const BaseController = require('./base')
 
 class SubscriberController extends BaseController {
@@ -15,7 +15,7 @@ class SubscriberController extends BaseController {
 
   getSubscribers(req, res, next) {
     console.log("GET /subscribers")
-    Subscriber.findAll().then((subscribers) => {
+    Subscriber.findAll({include: [ EmailRecord ]}).then((subscribers) => {
       res.json(subscribers)
     })
   }

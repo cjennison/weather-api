@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.STRING,
   }, {});
   Subscriber.associate = function(models) {
-    // associations can be defined here
+    Subscriber.hasMany(models.EmailRecord)
   };
   Subscriber.allowedAttributes = function() {
     return ['email', 'city', 'state']
