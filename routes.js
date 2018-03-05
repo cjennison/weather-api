@@ -1,5 +1,7 @@
 const SubscriberController = require('./controllers/subscriber')
-const WeatherEmailGenerator = require('./services/email/weather-email-generator')
+const WeatherEmailGenerator = require('./services/email/weather-newsletter/weather-email-generator')
+const { Subscriber } = require('./db/models')
+
 
 module.exports = function (server) {
   //Allow OPTIONS
@@ -12,9 +14,16 @@ module.exports = function (server) {
   new SubscriberController(server)
 
   server.get('/email-tester', (req, res) => {
-    const emailGenerator = new WeatherEmailGenerator()
-    emailGenerator.execute()
-
-    res.send(200)
+    Subscriber.findAll().then((subscribers) => {
+      for (const subscriber of subscribers) {
+        const emailGenerator = new WeatherEmailGenerator(subscriber);
+        emailGenerator.execute();
+      }
+    })
+    .catch((err) => {
+      console.log("Could not start email tester", err)
+    })
+    
+    res.send(200, "Queued Emails")
   })
 }

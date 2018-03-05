@@ -5,10 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "install": "^0.10.4",
+    "moment": "^2.21.0",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
     "nodemailer": "^4.6.0",
     "npm": "^5.7.1",
+    "request": "^2.83.0",
     "restify": "^6.3.4",
     "restify-plugins": "^1.6.0",
     "sequelize": "^4.35.1",

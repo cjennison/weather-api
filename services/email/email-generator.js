@@ -3,7 +3,9 @@ const emailTransporter = require('./email-transporter')
 const emailRecordCreator = require('../model-creators/email-record')
 
 class EmailGenerator {
-  constructor () {
+  constructor (subscriber) {
+    this.subscriber = subscriber
+
     this.fromAlias = "Chris Jennison"
     this.fromAddress = 'cjennison92@gmail.com';
 
@@ -41,45 +43,43 @@ class EmailGenerator {
     };
   }
 
-  sendMail(transporter, subscriber, options) {
+  sendMail(transporter, options) {
     console.log("Sending Mail w/ Options", options)
     transporter.sendMail(options, (error, info) => {
       if (error) {
         return console.log(error);
       }
 
-      this.createRecord(subscriber, options)
+      this.createRecord(options)
       console.log('Message sent: %s', info.messageId);
       console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     });
   }
 
-  execute(subscribers) {
+  execute() {
     emailTransporter.readyPromise.then((transporter) => {
-      for(const subscriber of subscribers) {
-        Promise.all([this.subject(subscriber), this.htmlBody(subscriber)])
-          .then((values) => {
-            this.sendMail(transporter, subscriber, this.mailOptions(
-              this.recipient(subscriber), 
-              values[0], 
-              values[1]
-            ))
-          })
-          .catch((error) => {
-            console.log("Failed to send email", error)
-          })
-      } 
+      Promise.all([this.subject(), this.htmlBody()])
+        .then((values) => {
+          this.sendMail(transporter, this.mailOptions(
+            this.recipient(), 
+            values[0], 
+            values[1]
+          ))
+        })
+        .catch((error) => {
+          console.log("Failed to send email", error)
+        })
     })
   }
 
-  createRecord (subscriber, options) {
+  createRecord (options) {
     const creator = new emailRecordCreator({
       emailType: this.emailType,
       toAddress: options.to,
       fromAddress: this.fromAddress,
       subject: options.subject,
       html: options.html
-    }, subscriber)
+    }, this.subscriber)
 
     creator.create()
   }
