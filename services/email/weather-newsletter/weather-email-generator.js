@@ -7,9 +7,8 @@ const htmlGenerator = require('./weather-newsletter-html-generator')
 class WeatherEmailGenerator extends EmailGenerator{
   constructor (subscriber) {
     super(subscriber)
-
     this.emailType = 1
-    //Use default from address
+    this.fromAddress = 'weather@chris-weather-app.com'
   }
 
   setSubscriberWeather() {
@@ -27,17 +26,11 @@ class WeatherEmailGenerator extends EmailGenerator{
   }
 
   subject() {
-    //TODO Promise is not necessary
-    return new Promise((resolve, reject) => {
-      resolve(subjectGenerator(this.weatherData))
-    })
+    return subjectGenerator(this.weatherData)
   }
 
   htmlBody() {
-    //TODO Promise is not necessary
-    return new Promise((resolve, reject) => {
-      resolve(htmlGenerator(this.weatherData))
-    })
+    return htmlGenerator(this.weatherData)
   }
 
   execute () {

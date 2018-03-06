@@ -17,20 +17,16 @@ class EmailGenerator {
   }
 
   subject() {
-    return new Promise((resolve, reject) => {
-      resolve('Hello, world!')
-    })
+    return 'Hello, world!';
   }
 
   //Override
   htmlBody() {
-    return new Promise((resolve, reject) => {
-      resolve('<div>Hello, world!</div>')
-    })
+    return '<div>Hello, world!</div>';
   }
 
   recipient() {
-    return 'cjennison92@gmail.com'
+    return 'cjennison92@gmail.com';
   }
 
   //Override
@@ -58,17 +54,11 @@ class EmailGenerator {
 
   execute() {
     emailTransporter.readyPromise.then((transporter) => {
-      Promise.all([this.subject(), this.htmlBody()])
-        .then((values) => {
-          this.sendMail(transporter, this.mailOptions(
-            this.recipient(), 
-            values[0], 
-            values[1]
-          ))
-        })
-        .catch((error) => {
-          console.log("Failed to send email", error)
-        })
+      this.sendMail(transporter, this.mailOptions(
+        this.recipient(), 
+        this.subject(), 
+        this.htmlBody()
+      ))
     })
   }
 
