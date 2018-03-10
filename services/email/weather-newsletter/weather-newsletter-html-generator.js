@@ -20,7 +20,7 @@ module.exports = function (weatherData, subscriber, weatherState) {
   return new Promise((resolve, reject) => {
     giphy.search({ 
         q: `weather,${weatherData[1].weather}`, 
-        limit: 10,
+        limit: 50,
         rating: 'g'
     }, function (err, res) { 
       var gifs = res.data;
