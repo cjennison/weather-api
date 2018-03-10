@@ -2,7 +2,7 @@ const EmailGenerator = require('../email-generator')
 const { getWeather } = require('./weather-pull-service')
 const subjectGenerator = require('./weather-newsletter-subject-generator')
 const htmlGenerator = require('./weather-newsletter-html-generator')
-
+const weatherState = require('./weather-state-service')
 
 class WeatherEmailGenerator extends EmailGenerator{
   constructor (subscriber) {
@@ -26,11 +26,11 @@ class WeatherEmailGenerator extends EmailGenerator{
   }
 
   subject() {
-    return subjectGenerator(this.weatherData)
+    return subjectGenerator(weatherState(this.weatherData))
   }
 
   htmlBody() {
-    return htmlGenerator(this.weatherData)
+    return htmlGenerator(this.weatherData, this.subscriber, weatherState(this.weatherData))
   }
 
   execute () {

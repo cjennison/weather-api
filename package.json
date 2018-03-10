@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^5.0.1",
+    "giphy": "0.0.4",
     "install": "^0.10.4",
     "moment": "^2.21.0",
     "mysql": "^2.15.0",

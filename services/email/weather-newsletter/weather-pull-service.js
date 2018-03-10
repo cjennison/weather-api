@@ -30,6 +30,7 @@ function returnParsedResponse(resolve, reject, error, response, body, key){
     const parsedBody = JSON.parse(body)
     resolve(parsedBody[key])
   } catch (e) {
+    console.log("error", e)
     return reject(error)
   }
 } 

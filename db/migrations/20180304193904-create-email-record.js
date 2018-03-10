@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       html: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('medium')
       },
       createdAt: {
         allowNull: false,

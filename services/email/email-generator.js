@@ -8,7 +8,6 @@ class EmailGenerator {
 
     this.fromAlias = "Chris Jennison"
     this.fromAddress = 'cjennison92@gmail.com';
-
     this.emailType = 0
   }
 
@@ -22,7 +21,9 @@ class EmailGenerator {
 
   //Override
   htmlBody() {
-    return '<div>Hello, world!</div>';
+    return new Promise((resolve, reject) => {
+      resolve('<div>Hello, world!</div>')
+    })
   }
 
   recipient() {
@@ -54,11 +55,16 @@ class EmailGenerator {
 
   execute() {
     emailTransporter.readyPromise.then((transporter) => {
-      this.sendMail(transporter, this.mailOptions(
-        this.recipient(), 
-        this.subject(), 
-        this.htmlBody()
-      ))
+      this.htmlBody().then((html) => {
+        this.sendMail(transporter, this.mailOptions(
+          this.recipient(), 
+          this.subject(), 
+          html
+        ))
+      })
+    })
+    .catch((err) => {
+      console.log("Error sending email", err)
     })
   }
 
