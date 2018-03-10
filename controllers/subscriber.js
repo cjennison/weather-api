@@ -28,7 +28,7 @@ class SubscriberController extends BaseController {
         res.send(200, subscriber)
       })
       .catch((err) => {
-        res.send(400, { error: "Failed to create subscriber" })
+        res.send(400, { msg: "Failed to create subscriber", error: err })
       })
   }
 }

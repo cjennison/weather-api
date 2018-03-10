@@ -2,12 +2,14 @@ const nodemailer = require('nodemailer');
 const emailTransporter = require('./email-transporter')
 const emailRecordCreator = require('../model-creators/email-record')
 
+require('dotenv').load();
+
 class EmailGenerator {
   constructor (subscriber) {
     this.subscriber = subscriber
 
-    this.fromAlias = "Chris Jennison"
-    this.fromAddress = 'cjennison92@gmail.com';
+    this.fromAlias = ""
+    this.fromAddress = process.env.MY_EMAIL;
     this.emailType = 0
   }
 
@@ -27,7 +29,7 @@ class EmailGenerator {
   }
 
   recipient() {
-    return 'cjennison92@gmail.com';
+    return '';
   }
 
   //Override

@@ -8,7 +8,6 @@ class WeatherEmailGenerator extends EmailGenerator{
   constructor (subscriber) {
     super(subscriber)
     this.emailType = 1
-    this.fromAddress = 'weather@chris-weather-app.com'
   }
 
   setSubscriberWeather() {
