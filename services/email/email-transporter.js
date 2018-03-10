@@ -14,7 +14,17 @@ class EmailTransporter {
 
   initTransporter() {
     this.readyPromise = new Promise((resolve, reject) => {
-      gmailTransporter(resolve, reject)
+      switch (process.env.TRANSPORT_METHOD) {
+        case 'gmail':
+          gmailTransporter(resolve, reject)
+          break;
+        case 'etheral':
+          etheralTransporter(resolve, reject)
+          break;
+        default:
+          reject("No transport method chosen")
+          break;
+      }
     })
 
     return this.readyPromise
