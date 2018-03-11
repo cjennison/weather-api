@@ -1,0 +1,12 @@
+{
+    "plugins": ["node"],
+    "extends": ["eslint:recommended", "plugin:node/recommended", "airbnb-base"],
+    "rules": {
+        "node/exports-style": ["error", "module.exports"],
+        "func-names": "off",
+        "iterators/generators": "off",
+        "import/no-dynamic-require": "off",
+        "class-methods-use-this": "off",
+        "comma-dangle": "off"
+    }
+}

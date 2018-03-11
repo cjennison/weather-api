@@ -1,12 +1,12 @@
-const { EmailRecord } = require('../../db/models')
+const { EmailRecord } = require('../../db/models');
 
 class EmailRecordCreator {
   constructor(params, subscriber) {
     if (!params || !subscriber) {
-      return new Error("Missing Params or Subscriber")
+      return new Error('Missing Params or Subscriber');
     }
-    this.params = params
-    this.subscriber = subscriber
+    this.params = params;
+    this.subscriber = subscriber;
   }
 
   create() {
@@ -14,13 +14,13 @@ class EmailRecordCreator {
       .then((emailRecord) => {
         emailRecord.setSubscriber(this.subscriber)
           .catch((error) => {
-            console.log("Could not associate email record with subscriber", error)
-          })
+            console.log('Could not associate email record with subscriber', error);
+          });
       })
       .catch((error) => {
-        console.log("Could not create EmailRecord", error)
-      })
+        console.log('Could not create EmailRecord', error);
+      });
   }
 }
 
-module.exports = EmailRecordCreator
+module.exports = EmailRecordCreator;

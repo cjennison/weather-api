@@ -1,9 +1,9 @@
-const whiteListedParams = require('../services/whitelist-param-helper')
+const whiteListedParams = require('../services/whitelist-param-helper');
 
 class BaseController {
-  whiteListedParams (params, model) {
-    return whiteListedParams(params, model)
+  whiteListedParams(params, model) {
+    return whiteListedParams(params, model);
   }
 }
 
-module.exports = BaseController
+module.exports = BaseController;

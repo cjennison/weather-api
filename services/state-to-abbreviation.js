@@ -1,3 +1,4 @@
+/* eslint-disable */
 //Source https://gist.github.com/calebgrove/c285a9510948b633aa47
 
 module.exports = function abbrState(input, to){

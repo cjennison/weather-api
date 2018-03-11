@@ -4,7 +4,7 @@ const giphy = require('giphy')('HTGCduC4qtvNYIZu6ntQqCgiBOfOfvMD');
 module.exports = function (weatherData, subscriber, weatherState) {
   const locationString = `${subscriber.city}, ${subscriber.state}`
 
-  let weatherTitleString = ""
+  let weatherTitleString = "";
   switch (weatherState) {
     case 'good':
       weatherTitleString = "It is a nice day out!";

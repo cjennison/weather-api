@@ -1,8 +1,8 @@
-const EmailGenerator = require('../email-generator')
-const { getWeather } = require('./weather-pull-service')
-const subjectGenerator = require('./weather-newsletter-subject-generator')
-const htmlGenerator = require('./weather-newsletter-html-generator')
-const weatherState = require('./weather-state-service')
+const EmailGenerator = require('../email-generator');
+const { getWeather } = require('./weather-pull-service');
+const subjectGenerator = require('./weather-newsletter-subject-generator');
+const htmlGenerator = require('./weather-newsletter-html-generator');
+const weatherState = require('./weather-state-service');
 
 class WeatherEmailGenerator extends EmailGenerator{
   constructor (subscriber) {
@@ -13,30 +13,30 @@ class WeatherEmailGenerator extends EmailGenerator{
   setSubscriberWeather() {
     return getWeather(this.subscriber)
       .then((weatherData) => {
-        this.weatherData = weatherData
+        this.weatherData = weatherData;
       })
       .catch((err) => {
-        console.log("Failed to get weather", err)
-      })
+        console.log('Failed to get weather', err);
+      });
   }
 
   recipient() {
-    return this.subscriber.email
+    return this.subscriber.email;
   }
 
   subject() {
-    return subjectGenerator(weatherState(this.weatherData))
+    return subjectGenerator(weatherState(this.weatherData));
   }
 
   htmlBody() {
-    return htmlGenerator(this.weatherData, this.subscriber, weatherState(this.weatherData))
+    return htmlGenerator(this.weatherData, this.subscriber, weatherState(this.weatherData));
   }
 
   execute () {
     this.setSubscriberWeather().then(() => {
       super.execute();
-    })
+    });
   }
 }
 
-module.exports = WeatherEmailGenerator
+module.exports = WeatherEmailGenerator;
