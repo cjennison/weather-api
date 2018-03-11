@@ -24,11 +24,14 @@ class SubscriberController extends BaseController {
     console.log('POST /subscribers');
 
     Subscriber.create(this.whiteListedParams(req.body, Subscriber))
-      .then((subscriber) => {
-        res.send(200, subscriber);
+      .then(() => {
+        res.send(200);
       })
       .catch((err) => {
-        res.send(400, { msg: 'Failed to create subscriber', error: err });
+        console.log(err);
+
+        //  Send positive response to prevent attack on subscriber base
+        res.send(200);
       });
   }
 }
