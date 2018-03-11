@@ -7,6 +7,7 @@
         "iterators/generators": "off",
         "import/no-dynamic-require": "off",
         "class-methods-use-this": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-new": "warn"
     }
 }
