@@ -22,15 +22,14 @@ function returnParsedResponse(resolve, reject, error, response, body, key) {
 
 function getWeather(subscriber) {
   const dateFormatted = moment().format('YYYYMMDD');
-
   const historicPromise = new Promise((resolve, reject) => {
-    request(`http://api.wunderground.com/api/${config.key}/history_${dateFormatted}/q/${stateToAbbreviation(subscriber.state, 'abbr')}/${subscriber.city}.json`, (error, response, body) => {
+    request(`http://api.wunderground.com/api/${config.key}/history_${dateFormatted}/q/${stateToAbbreviation(subscriber.state, 'abbr')}/${subscriber.city.replace(' ', '_')}.json`, (error, response, body) => {
       returnParsedResponse(resolve, reject, error, response, body, 'history');
     });
   });
 
   const currentConditionsPromise = new Promise((resolve, reject) => {
-    request(`http://api.wunderground.com/api/${config.key}/conditions/q/${stateToAbbreviation(subscriber.state, 'abbr')}/${subscriber.city}.json`, (error, response, body) => {
+    request(`http://api.wunderground.com/api/${config.key}/conditions/q/${stateToAbbreviation(subscriber.state, 'abbr')}/${subscriber.city.replace(' ', '_')}.json`, (error, response, body) => {
       returnParsedResponse(resolve, reject, error, response, body, 'current_observation');
     });
   });

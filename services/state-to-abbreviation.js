@@ -12,6 +12,7 @@ module.exports = function abbrState(input, to){
       ['Colorado', 'CO'],
       ['Connecticut', 'CT'],
       ['Delaware', 'DE'],
+      ['District Of Columbia', 'DC'],
       ['Florida', 'FL'],
       ['Georgia', 'GA'],
       ['Hawaii', 'HI'],
@@ -59,6 +60,7 @@ module.exports = function abbrState(input, to){
 
   if (to == 'abbr'){
       input = input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        console.log(input)
       for(let i = 0; i < states.length; i++){
           if(states[i][0] == input){
               return(states[i][1]);
